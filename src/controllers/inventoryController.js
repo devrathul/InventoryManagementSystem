@@ -60,7 +60,7 @@ exports.deleteInventory = (req, res) => {
         return res.status(404).send("Product Not Found...")
     }
 
-    productsList.splice(productIndex, -1)
+    productsList.splice(productIndex, 1)
 
     return res.status(200).send("Product Deleted")
 }
