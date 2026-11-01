@@ -50,6 +50,7 @@ exports.updateInventory = (req, res) => {
     return res.status(200).send(productsList)
 }
 
+// Delete
 
 exports.deleteInventory = (req, res) => {
     const productID = parseInt(req.params.id)
