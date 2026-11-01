@@ -1,7 +1,10 @@
 const express = require('express');
+const inventory_Router = require('./routes/inventoryRoutes')
 const app = express();
-const port = 3000;
 
-app.listen(port,()=>{
-    console.log(`Server running sucessfully... http://localhost:${port}`)
+app.use(express.json())
+app.use('/product', inventory_Router)
+
+app.listen(3000, () => {
+    console.log(`Server running sucessfully... http://localhost:3000`)
 })
