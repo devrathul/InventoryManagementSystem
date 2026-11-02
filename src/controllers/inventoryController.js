@@ -12,16 +12,20 @@ exports.addInventory = (req, res) => {
 // Fetch All
 exports.getInventory = (req, res) => {
 
-    const { search } = req.query
+    const search = String(req.query.search ?? '').trim().toLowerCase()
+    const category = String(req.query.category ?? '').trim().toLowerCase()
 
     if (productsList.length <= 0) {
         return res.send("Product list is empty...")
     }
-    if (search) {
-        const filterProductList = productsList.filter(product => product.name.toLowerCase().includes(search.toLowerCase()))
-        return res.status(200).json(filterProductList)
-    }
-    return res.status(200).json(productsList)
+    const filterProductList = productsList.filter(product => {
+        const matchesSearch = product.name.toLowerCase().includes(search)
+        const matchesCategory = product.category.toLowerCase().includes(category)
+        
+        return matchesSearch && matchesCategory
+    })
+
+    return res.status(200).json(filterProductList)
 }
 
 // Fetch Single
